@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+}
+.footer {
+	text-align: center;
+}
+.movie_container {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-block: 50px;
+}
