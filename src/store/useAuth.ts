@@ -1,10 +1,5 @@
 import { create } from "zustand";
-
-interface User {
-	username: string;
-	email: string;
-	password: string;
-}
+import { User } from "../models/types";
 
 interface AuthState {
 	isLoggedIn: boolean;
@@ -14,7 +9,8 @@ interface AuthState {
 	registerUser: (user: User) => void;
 	logoutUser: () => void;
 	setIsRegistering: (value: boolean) => void;
-	checkAuthStatus: () => void; 
+	checkAuthStatus: () => void;
+	getUser: () => User | null; 
 }
 
 const useAuth = create<AuthState>((set) => ({
@@ -40,7 +36,7 @@ const useAuth = create<AuthState>((set) => ({
 	registerUser: (user) => {
 		localStorage.setItem("user", JSON.stringify(user));
 		localStorage.setItem("isAuth", "true");
-		set({ isLoggedIn: true, isRegistering: false });
+		set({ isLoggedIn: false, isRegistering: false });
 	},
 
 	logoutUser: () => {
@@ -56,6 +52,11 @@ const useAuth = create<AuthState>((set) => ({
 			set({ isLoggedIn: true });
 		}
 	},
+
+	getUser: () => {
+		const storedUser = localStorage.getItem("user");
+		return storedUser ? JSON.parse(storedUser) as User : null;
+	}
 }));
 
 export default useAuth;
