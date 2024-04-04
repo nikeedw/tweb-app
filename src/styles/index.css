@@ -1,0 +1,32 @@
+.App {
+	height: 100vh;
+}
+.Main {
+	display: flex;
+	height: calc(100% - 129px);
+	justify-content: center;
+	align-items: center;
+}
+.footer {
+	text-align: center;
+}
+.product_container {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-block: 10px;
+}
+.Loading {
+	display: flex;
+	justify-content: center;
+	height: calc(100% - 129px);
+	align-items: center;
+}
+.Card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-block: 10px;
+	height: calc(100% - 129px);;
+}

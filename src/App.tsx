@@ -1,12 +1,12 @@
 import { FC } from "react";
-import Layout from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
 
 const App: FC = () => {
 	return (
 		<div className="App">
-			<Layout />
+			<Navbar />
 			<Outlet />
 			<Footer title="New Application" />
 		</div>

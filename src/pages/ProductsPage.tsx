@@ -1,43 +1,32 @@
-import { FC, useEffect, useState } from "react"
-import MovieCard from "../components/ProductCard";
-
-export type TProduct = {
-    brand: string;
-    category: string
-    description: string
-    discountPercentage: number
-    id: number
-    images: string[]
-    price: number
-    rating: number
-    stock: number
-    thumbnail: string
-    title: string
-}
+import { FC, useEffect } from "react"
+import useProducts from "../store/useProducts";
+import ProductCard from "../components/ProductCard";
 
 const ProductsPage: FC = () => {
-	const [products, setProducts] = useState<TProduct[]>([]);
-
-	const fetchProducts = () => {
-		fetch('https://dummyjson.com/products')
-			.then(response => response.json())
-			.then(data => setProducts(data.products));
-	};
+	const productStore = useProducts();
 
 	useEffect(() => {
-		fetchProducts();
-	}, []);
+		productStore.fetchProducts();
+	}, [])
 
-	const handleDelete = (id: number): void => {
-		const newProducts = products.filter(product => product.id !== id);
-		setProducts(newProducts);
-	}
+	return productStore.loading ? <h2 className="Loading">Loading...</h2> : (
+		<div style={{
+			display: 'flex',
+			flexWrap: 'wrap',
+			justifyContent: 'center',
+			gap: '1rem',
+			padding: '1rem',
+			margin: '1rem'
 
-	return (
-		<div className="movie_container">
-			{products.map((product) => (
-				<MovieCard key={product.id} product={product} handleDelete={handleDelete} />
-			))}
+		}}>
+			<div className="product_container">
+				{productStore.getProducts().map((product) => {
+					return (
+						<ProductCard key={product.id} product={product} />
+					)
+				}
+				)}
+			</div>
 		</div>
 	)
 }

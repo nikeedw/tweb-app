@@ -1,6 +1,6 @@
 const MainPage = () => {
   return (
-	<h1 style={{textAlign: "center"}}>
+	<h1 className="Main">
 		Main Page
 	</h1>
   )
