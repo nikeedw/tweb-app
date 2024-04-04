@@ -7,6 +7,17 @@
 	justify-content: center;
 	align-items: center;
 }
+.Auth {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 400px;
+	justify-content: center;
+	align-items: center;
+}
+.Auth>button {
+	width: 100%;
+}
 .footer {
 	text-align: center;
 }

@@ -4,22 +4,29 @@ import './styles/root.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import ErrorPage from './pages/ErrorPage'
-import RoutesExact from './routes/RoutesEnum'
+import { PrivateRoutes, PublicRoutes } from './routes/RoutesEnum'
+
+const isAuth = localStorage.getItem('isAuth');
 
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: '/',
 		element: <App />,
 		errorElement: <ErrorPage />,
-		children: RoutesExact.map(route => {
-				return {
-					path: route.path,
-					element: route.element,
-					exact: route.exact
-				}
-			}),
-	},
-])
+		children: isAuth === 'false' ? 
+		PublicRoutes.map(route => ({
+			path: route.path,
+			element: route.element,
+			exact: route.exact,
+		})) : 
+		PrivateRoutes.map(route => ({
+			path: route.path,
+			element: route.element,
+			exact: route.exact,
+		})),
+	}
+]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<RouterProvider router={router} />

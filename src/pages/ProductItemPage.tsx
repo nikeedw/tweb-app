@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from 'antd';
 import { TProduct } from '../models/types';
+import Button from '../components/UI/button/Button';
 
 const { Meta } = Card;
 
@@ -23,13 +24,13 @@ const ProductItemPage: FC = () => {
 
 	return (
 		<>
-			<button onClick={() => navigate(-1)} style={{
+			<Button onClick={() => navigate(-1)} style={{
 				padding: '5px 15px',
 				cursor: 'pointer',
 				position: 'absolute',
 				top: 80,
-				left: 20
-			}}>Back</button>
+				left: 50
+			}}> &lt;- Back</Button>
 			<div className='Card'>
 				<Card
 					style={{display: 'flex', flexDirection: 'row'}}

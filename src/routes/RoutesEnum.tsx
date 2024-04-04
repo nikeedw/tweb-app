@@ -9,7 +9,7 @@ export enum RoutesEnum {
 	Product = '/products/:id'
 }
 
-export const NavRoutes = [
+const NavRoutes = [
 	{
 		id: '1',
 		path: RoutesEnum.Main,
@@ -29,7 +29,7 @@ export const NavRoutes = [
 	}
 ]
 
-const RoutesExact = [
+export const PrivateRoutes = [
 	{
 		path: RoutesEnum.Main,
 		element: <MainPage />,
@@ -45,5 +45,13 @@ const RoutesExact = [
 	}
 ]
 
+export const PublicRoutes = [
+	{
+		path: RoutesEnum.Main,
+		element: <MainPage />,
+		exact: true,
+	}
+]
 
-export default RoutesExact;
+
+export default NavRoutes
