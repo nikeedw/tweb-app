@@ -34,10 +34,17 @@
 	height: calc(100% - 129px);
 	align-items: center;
 }
-.Card {
+.card-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-block: 10px;
-	height: calc(100% - 129px);;
+	padding: 10px;
+	min-height: calc(100% - 129px);
+}
+.card {
+	display: flex; 
+	flex-direction: row; 
+	overflow: hidden;
+	background: rgb(236, 236, 236);
+	border: 1px solid black;
 }

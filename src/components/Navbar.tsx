@@ -8,21 +8,25 @@ import { User } from "../models/types";
 
 const { Header } = AntdLayout;
 
-const items = NavRoutes.map(route => {
-	return {
-		key: route.id,
-		icon: route.icon,
-		title: route.title,
-		label: route.title,
-		route: route.path,
-		disabled: route.hideLink
-	}
-});
-
 const Navbar: FC = () => {
+	const items = NavRoutes.map(route => {
+		return {
+			key: route.id,
+			icon: route.icon,
+			title: route.title,
+			label: route.title,
+			route: route.path,
+			disabled: route.hideLink
+		}
+	});
+
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { logoutUser, getUser, isLoggedIn } = useAuth();
+
+	if(isLoggedIn === false) {
+		items[1].disabled = true;
+	}
 
 	const [user, setUser] = useState<User | null>(null);
 
@@ -43,6 +47,11 @@ const Navbar: FC = () => {
 		}
 	};
 
+	const handleLogout = () => {
+		logoutUser();
+		navigate('/');
+	}
+
 	return (
 		<AntdLayout>
 			<Header>
@@ -61,13 +70,15 @@ const Navbar: FC = () => {
 				color: 'white',
 				userSelect: 'none'
 			}}>{user.username}</h2>} 
-			<Button style={{
-				position: 'absolute',
-				top: 12,
-				right: 15
-			}} onClick={logoutUser}>
-				Logout
-			</Button>
+			{isLoggedIn &&
+				<Button style={{
+					position: 'absolute',
+					top: 12,
+					right: 15
+				}} onClick={handleLogout}>
+					Logout
+				</Button>
+			}
 		</AntdLayout>
 	);
 };

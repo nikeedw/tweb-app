@@ -1,9 +1,10 @@
-import { Button as AntButton, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import useAuth from '../store/useAuth';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
 const MainPage = () => {
-	const { isLoggedIn, isRegistering, error, loginUser, registerUser, setIsRegistering, checkAuthStatus } = useAuth();
+	const { isLoggedIn, isRegistering, error, checkAuthStatus } = useAuth();
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -11,19 +12,6 @@ const MainPage = () => {
 	useEffect(() => {
 		checkAuthStatus();
 	}, []);
-
-	const register = () => {
-		registerUser({ username, email, password });
-		setEmail('');
-		setUsername('');
-		setPassword('');
-	}
-
-	const login = () => {
-		loginUser(email, password);
-		setEmail('');
-		setPassword('');
-	}
 
 	return (
 		<div className="Main">
@@ -34,25 +22,22 @@ const MainPage = () => {
 			) : (
 				<div className='Auth'>
 					{!isRegistering && (
-						<>
-							<h1>Login</h1>
-							<Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-							<Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-							<AntButton onClick={login}>Login</AntButton>
-							<h5>У вас еще нет аккаунта?</h5>
-							<span style={{ color: 'cornflowerblue', cursor: 'pointer' }} onClick={() => setIsRegistering(true)}>Зарегистрироваться</span>
-						</>
+						<Login 
+							email={email}
+							setEmail={setEmail}
+							password={password}
+							setPassword={setPassword}
+						/>
 					)}
 					{isRegistering && (
-						<>
-							<h1>Register</h1>
-							<Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-							<Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-							<Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-							<AntButton onClick={register}>Register</AntButton>
-							<h5>Уже есть аккаунт?</h5>
-							<span style={{ color: 'cornflowerblue', cursor: 'pointer' }} onClick={() => setIsRegistering(false)}>Войти</span>
-						</>
+						<Register 
+							username={username}
+							setUsername={setUsername}
+							email={email}
+							setEmail={setEmail}
+							password={password}
+							setPassword={setPassword}
+						/>
 					)}
 					{error && <p>{error}</p>}
 				</div>
