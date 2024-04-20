@@ -12,7 +12,7 @@ export type TProduct = {
 	title: string
 }
 
-export interface User {
+export interface IUser {
 	username: string;
 	email: string;
 	password: string;

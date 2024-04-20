@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import NavRoutes from "../routes/RoutesEnum";
 import Button from "./UI/button/Button";
 import useAuth from "../store/useAuth";
-import { User } from "../models/types";
+import { IUser } from "../models/types";
 
 const { Header } = AntdLayout;
 
@@ -28,7 +28,7 @@ const Navbar: FC = () => {
 		items[1].disabled = true;
 	}
 
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<IUser | null>(null);
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -38,7 +38,7 @@ const Navbar: FC = () => {
 	}, [getUser, isLoggedIn]);
 	
 
-	const defaultSelectedKeys = location.pathname === '/products' ? ['2'] : ['1'];
+	const defaultSelectedKeys = location.pathname === ('/products' || '/products/:id') ? ['2'] : ['1'];
 
 	const onClick: MenuProps['onClick'] = (e) => {
 		const path = items.find((item) => item.key === e.key)?.route;
@@ -56,7 +56,7 @@ const Navbar: FC = () => {
 		<AntdLayout>
 			<Header>
 				<Menu
-					defaultSelectedKeys={defaultSelectedKeys}
+					defaultSelectedKeys={defaultSelectedKeys} 
 					theme="dark"
 					mode="horizontal"
 					items={items}

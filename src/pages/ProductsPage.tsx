@@ -17,7 +17,6 @@ const ProductsPage: FC = () => {
 			gap: '1rem',
 			padding: '1rem',
 			margin: '1rem'
-
 		}}>
 			<div className="product_container">
 				{productStore.getProducts().map((product) => {

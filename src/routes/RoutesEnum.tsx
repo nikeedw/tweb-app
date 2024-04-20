@@ -36,11 +36,11 @@ export const PrivateRoutes = [
 		exact: true,
 	}, {
 		path: RoutesEnum.Products,
-		element:  <ProductsPage />,
+		element: <ProductsPage />,
 		exact: true,
 	}, {
 		path: RoutesEnum.Product,
-		element:  <ProductItemPage />,
+		element: <ProductItemPage />,
 		exact: true,
 	}
 ]
