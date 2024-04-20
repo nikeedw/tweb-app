@@ -1,16 +1,16 @@
 import { create } from "zustand";
-import { User } from "../models/types";
+import { IUser } from "../models/types";
 
 interface AuthState {
 	isLoggedIn: boolean;
 	isRegistering: boolean;
 	error: string;
 	loginUser: (email: string, password: string) => void;
-	registerUser: (user: User) => void;
+	registerUser: (user: IUser) => void;
 	logoutUser: () => void;
 	setIsRegistering: (value: boolean) => void;
 	checkAuthStatus: () => void;
-	getUser: () => User | null; 
+	getUser: () => IUser | null; 
 }
 
 const useAuth = create<AuthState>((set) => ({
@@ -21,7 +21,7 @@ const useAuth = create<AuthState>((set) => ({
 	loginUser: (email, password) => {
 		const storedUser = localStorage.getItem("user");
 		if (storedUser) {
-			const parsedUser = JSON.parse(storedUser) as User;
+			const parsedUser = JSON.parse(storedUser) as IUser;
 			if (parsedUser.email === email && parsedUser.password === password) {
 				set({ isLoggedIn: true, error: "", isRegistering: false });
 				localStorage.setItem("isAuth", "true");
@@ -35,7 +35,7 @@ const useAuth = create<AuthState>((set) => ({
 
 	registerUser: (user) => {
 		localStorage.setItem("user", JSON.stringify(user));
-		localStorage.setItem("isAuth", "true");
+		localStorage.setItem("isAuth", "false");
 		set({ isLoggedIn: false, isRegistering: false });
 	},
 
@@ -55,7 +55,7 @@ const useAuth = create<AuthState>((set) => ({
 
 	getUser: () => {
 		const storedUser = localStorage.getItem("user");
-		return storedUser ? JSON.parse(storedUser) as User : null;
+		return storedUser ? JSON.parse(storedUser) as IUser : null;
 	}
 }));
 

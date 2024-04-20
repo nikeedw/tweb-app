@@ -5,11 +5,11 @@ type Props = {
 }
 
 const Content: FC<Props> = ({ children }) => {
-  return (
-	<div style={{height: '100%'}}>
-	  {children}
-	</div>
-  )
+	return (
+		<div style={{ height: '100%' }}>
+			{children}
+		</div>
+	)
 }
 
 export default Content

@@ -14,14 +14,15 @@ const ProductItemPage: FC = () => {
 
 	const { id } = useParams<{ id: string }>();
 
+	const fetchData = async () => {
+		await productStore.fetchProducts();
+		if (id) {
+			const prod = productStore.getProductById(Number(id))
+			setProduct(prod)
+		}
+	};
+
 	useEffect(() => {
-		const fetchData = async () => {
-			await productStore.fetchProducts();
-			if (id) {
-				const prod = productStore.getProductById(Number(id))
-				setProduct(prod)
-			}
-		};
 		fetchData();
 	}, []);
 
@@ -40,7 +41,7 @@ const ProductItemPage: FC = () => {
 				>
 					<Meta title={product?.brand} description={product?.description} />
 					<hr style={{ marginBlock: 10 }} />
-					<Meta description={product?.category} title={product?.price} />
+					<Meta description={product?.category} title={product?.price + '$'} />
 				</Card>
 			</div>
 		</>
